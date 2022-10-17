@@ -41,7 +41,7 @@ layout = [
     [sg.Slider(range=(0, 5), default_value=wt1, size=(50, 10), orientation="h",
                 enable_events=True, key="slider3",resolution = 0.1)],
     [sg.Text("Weight 2")],
-    [sg.Slider(range=(0, 5), default_value=wt2, size=(50, 10), orientation="h",
+    [sg.Slider(range=(-5, 5), default_value=wt2, size=(50, 10), orientation="h",
                 enable_events=True, key="slider4",resolution = 0.1)],
     [sg.Text("Gamma value")],
     [sg.Slider(range=(0, 5), default_value=gammaValue, size=(50, 10), orientation="h",
@@ -65,8 +65,8 @@ def Unsharp():
         cv2.imshow('blurred/inverted', img_not)
         #overlay onto the original
         weightedSum = cv2.addWeighted(img1, wt1, img_not, wt2, gammaValue)
-
-        Syntax: cv2.addWeighted(img1, wt1, img2, wt2, gammaValue)
+        #test= cv2.subtract(img_not,img1)
+        #Syntax: cv2.addWeighted(img1, wt1, img2, wt2, gammaValue)
         '''Parameters:
         img1: First Input Image array(Single-channel, 8-bit or floating-point)
         wt1: Weight of the first input image elements to be applied to the final image
@@ -76,6 +76,7 @@ def Unsharp():
         '''
         cv2.imshow('subtracted', weightedSum)
         cv2.imshow('original', img)
+        #cv2.imshow("test", test)
         cv2.imwrite("weightedSum.png", weightedSum)
 
 window = sg.Window("slider test", layout)
