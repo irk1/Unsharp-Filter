@@ -26,10 +26,10 @@ layout = [
     [sg.Text("File Name")],
     [sg.Input(default_text = "savedImage.png", enable_events = True ,key ="saveName")],
     [sg.Text("Gaussian kernel size X")],
-    [sg.Slider(range=(0, 10), default_value=ksizeW, size=(50, 10), orientation="h",
+    [sg.Slider(range=(0, 100), default_value=ksizeW, size=(50, 10), orientation="h",
                 enable_events=True, key="slider0",resolution = 1)],
     [sg.Text("Gaussian kernel size Y")],
-    [sg.Slider(range=(0, 10), default_value=ksizeH, size=(50, 10), orientation="h",
+    [sg.Slider(range=(0, 100), default_value=ksizeH, size=(50, 10), orientation="h",
                 enable_events=True, key="sliderA",resolution = 1)],
     [sg.Text("Σx")],
     [sg.Slider(range=(0, 10), default_value=sigmax, size=(50, 10), orientation="h",
@@ -62,7 +62,7 @@ def Unsharp():
         #cv2.imshow('Gaussian Blurring', Gaussian)
         #invert the blurred copy
         img_not = cv2.bitwise_not(Gaussian)
-        #cv2.imshow('blurred/inverted', img_not)
+        cv2.imshow('blurred/inverted', img_not)
         #overlay onto the original
         weightedSum = cv2.addWeighted(img1, wt1, img_not, wt2, gammaValue)
 
@@ -126,7 +126,7 @@ while True:
     if event == "cv2Close":
         cv2.destroyWindow('subtracted')
         cv2.destroyWindow('original')
-
+        cv2.destroyWindow('blurred/inverted')
 
 
 window.close()
