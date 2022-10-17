@@ -13,8 +13,8 @@ ksizeW = 7
 ksizeH = 7
 sigmax = 7
 sigmay = 0
-wt1 = 0.1
-wt2 = 0.1
+wt1 = 1
+wt2 = 0.8
 gammaValue = 0.1
 
 val = 0
@@ -38,13 +38,13 @@ layout = [
     [sg.Slider(range=(0, 10), default_value=sigmay, size=(50, 10), orientation="h",
                 enable_events=True, key="slider2",resolution = 0.1)],
     [sg.Text("Weight 1")],
-    [sg.Slider(range=(0, 10), default_value=wt1, size=(50, 10), orientation="h",
+    [sg.Slider(range=(0, 5), default_value=wt1, size=(50, 10), orientation="h",
                 enable_events=True, key="slider3",resolution = 0.1)],
     [sg.Text("Weight 2")],
-    [sg.Slider(range=(0, 10), default_value=wt2, size=(50, 10), orientation="h",
+    [sg.Slider(range=(0, 5), default_value=wt2, size=(50, 10), orientation="h",
                 enable_events=True, key="slider4",resolution = 0.1)],
     [sg.Text("Gamma value")],
-    [sg.Slider(range=(0, 10), default_value=gammaValue, size=(50, 10), orientation="h",
+    [sg.Slider(range=(0, 5), default_value=gammaValue, size=(50, 10), orientation="h",
                 enable_events=True, key="slider5",resolution = 0.1)],
     [sg.Button("Run",enable_events = True, key ="submit")]+[sg.Button("Close Display Windows",enable_events = True, key ="cv2Close")]+[sg.Button("Exit",enable_events = True,k="Exit")]
 
