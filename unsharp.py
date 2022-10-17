@@ -40,7 +40,7 @@ layout = [
     [sg.Text("Gamma value")],
     [sg.Slider(range=(0, 10), default_value=gammaValue, size=(50, 10), orientation="h",
                 enable_events=True, key="slider5",resolution = 0.1)],
-    [sg.Button("Submit",enable_events = True, key ="submit")]+[sg.Button("Close Display Windows",enable_events = True, key ="cv2Close")]+[sg.Button("Exit",enable_events = True,k="Exit")]
+    [sg.Button("Run",enable_events = True, key ="submit")]+[sg.Button("Close Display Windows",enable_events = True, key ="cv2Close")]+[sg.Button("Exit",enable_events = True,k="Exit")]
 
 ]
 
@@ -109,34 +109,11 @@ while True:
         wt1 = int(values["slider3"])
         wt2 = int(values["slider4"])
         gammaValue = int(values["slider5"])
-        Unsharp()
-        '''
-        #import original and duplicate
-        img = cv2.imread(file)
-        os.chdir(directory)
-        cv2.imwrite(file1, img)
-        #apply guassiun blur to copy of original
-        img1 = cv2.imread(file1)
-        Gaussian = cv2.GaussianBlur(img1 ,(ksizeW,ksizeH), sigmax)
-        #cv2.imshow('Gaussian Blurring', Gaussian)
-        #invert the blurred copy
-        img_not = cv2.bitwise_not(Gaussian)
-        #cv2.imshow('blurred/inverted', img_not)
-        #overlay onto the original
-        weightedSum = cv2.addWeighted(img1, wt1, img_not, wt2, gammaValue)
+        if ksizeW % 2 == 0 or ksizeH % 2 == 0:
+            print('ERROR: KSIZE CANNOT BE EVEN')
+        else:
+            Unsharp()
 
-        Syntax: cv2.addWeighted(img1, wt1, img2, wt2, gammaValue)
-        Parameters:
-        img1: First Input Image array(Single-channel, 8-bit or floating-point)
-        wt1: Weight of the first input image elements to be applied to the final image
-        img2: Second Input Image array(Single-channel, 8-bit or floating-point)
-        wt2: Weight of the second input image elements to be applied to the final image
-        gammaValue: Measurement of light
-
-        cv2.imshow('subtracted', weightedSum)
-        cv2.imshow('original', img)
-        cv2.imwrite("weightedSum.png", weightedSum)
-        '''
     if event == "cv2Close":
         cv2.destroyWindow('subtracted')
         cv2.destroyWindow('original')
