@@ -9,13 +9,13 @@ file = r"C:\Users\izzyk\OneDrive\Documents\GitHub\Unsharp-Filter\unsharp test ph
 directory = r"C:\Users\izzyk\OneDrive\Documents\GitHub\Unsharp-Filter"
 filename = 'savedImage.png'
 file1 = 'fileCopyTemp.png'
-ksizeW = 7
-ksizeH = 7
+ksizeW = 87
+ksizeH = 87
 sigmax = 7
 sigmay = 0
-wt1 = 1
-wt2 = 0.8
-gammaValue = 0.1
+wt1 = 1.5
+wt2 = -0.5
+gammaValue = 0
 
 val = 0
 layout = [
@@ -32,7 +32,7 @@ layout = [
     [sg.Slider(range=(0, 100), default_value=ksizeH, size=(50, 10), orientation="h",
                 enable_events=True, key="sliderA",resolution = 1)],
     [sg.Text("Σx")],
-    [sg.Slider(range=(0, 10), default_value=sigmax, size=(50, 10), orientation="h",
+    [sg.Slider(range=(0, 100), default_value=sigmax, size=(50, 10), orientation="h",
                 enable_events=True, key="slider1",resolution = 1)],
     [sg.Text("Σy")],
     [sg.Slider(range=(0, 10), default_value=sigmay, size=(50, 10), orientation="h",
@@ -62,6 +62,7 @@ def Unsharp():
         #cv2.imshow('Gaussian Blurring', Gaussian)
         #invert the blurred copy
         img_not = cv2.bitwise_not(Gaussian)
+        #img_not = Gaussian
         cv2.imshow('blurred/inverted', img_not)
         #overlay onto the original
         weightedSum = cv2.addWeighted(img1, wt1, img_not, wt2, gammaValue)
@@ -78,7 +79,10 @@ def Unsharp():
         cv2.imshow('original', img)
         #cv2.imshow("test", test)
         cv2.imwrite("weightedSum.png", weightedSum)
-
+        #test= img1-img_not
+        #test1= img1*img_not
+        #cv2.imshow("test", test)
+        #cv2.imshow("test1", test1)
 window = sg.Window("slider test", layout)
 window.Finalize()
 while True:
@@ -110,7 +114,7 @@ while True:
             val = values["spin"]
             window.Element("slider").Update(val)
     if event == "submit":
-        print("did stuff")
+        #print("did stuff")
         ksizeW = int(values["slider0"])
         ksizeH = int(values["sliderA"])
 
@@ -128,7 +132,8 @@ while True:
         cv2.destroyWindow('subtracted')
         cv2.destroyWindow('original')
         cv2.destroyWindow('blurred/inverted')
-
+        #cv2.destroyWindow('test')
+        #cv2.destroyWindow('test1')
 
 window.close()
 '''
