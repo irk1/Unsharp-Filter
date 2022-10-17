@@ -19,6 +19,12 @@ gammaValue = 0.1
 
 val = 0
 layout = [
+    [sg.Text("File Location")],
+    [sg.Input(default_text = "C:\\Users\\izzyk\\OneDrive\\Documents\\GitHub\\Unsharp-Filter\\unsharp test photo.png", enable_events = True ,key ="fileLocation")],
+    [sg.Text("Location To Save")],
+    [sg.Input(default_text = "C:\\Users\\izzyk\\OneDrive\\Documents\\GitHub\\Unsharp-Filter", enable_events = True ,key ="saveDirectory")],
+    [sg.Text("File Name")],
+    [sg.Input(default_text = "savedImage.png", enable_events = True ,key ="saveName")],
     [sg.Text("Gaussian kernel size X")],
     [sg.Slider(range=(0, 10), default_value=ksizeW, size=(50, 10), orientation="h",
                 enable_events=True, key="slider0",resolution = 1)],
@@ -83,6 +89,9 @@ while True:
     wt1 = int(values["slider3"])
     wt2 = int(values["slider4"])
     gammaValue = int(values["slider5"])
+    file = str(values["fileLocation"])
+    directory = str(values["saveDirectory"])
+    filename = str(values["saveName"])
 #    print("\n \n ksizeW",ksizeW,",",ksizeH) #kernel size
 #    print("\n sigmax",sigmax)#sigma x
 #    print("\n sigmay",sigmay)#sigma y
